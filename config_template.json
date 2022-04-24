@@ -1,0 +1,11 @@
+{
+    "TOKEN": "",
+    "CLIENT_ID": "",
+    "BOT_PREFIX": "?",
+    "CHANNEL": "",
+    "CHANNEL_ID": 0,
+    
+    "QUEUE_DELAY": 20,
+    "QUEUE_TYPE": "LINEAR",
+    "QUEUE_ALERTS": 1
+}

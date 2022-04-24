@@ -1,0 +1,51 @@
+Global Character cPlayer1;
+Global Character cPlayer2;
+
+Job jModState("Flow_Setup.Act_4");
+
+State Base()
+{
+	Conditions
+	{
+		if ( SafeToInterruptGameplay() && jModState.GetValue("Act4_Mission") == 999 )
+		{
+			jModState.SetValue("Act4_Mission", 1000);
+		}
+		elseif ( !SafeToInterruptGameplay() && jModState.GetValue("Act4_Mission") != 999 )
+		{
+			jModState.SetValue("Act4_Mission", 999);
+		};
+		
+		
+		if ( jModState.GetValue("Act4_Mission") == 1001 ) // Check if the Python script has sent over an effect to be executed
+		{
+			cPlayer1.Kill();
+			if ( cPlayer1.GetVehicle() ) 
+			{ 
+				cPlayer1.ClearVehicle(); 
+			};
+
+			if ( cPlayer2 ) 
+			{ 
+				cPlayer2.Kill(); 
+				if ( cPlayer2.GetVehicle() ) 
+				{ 
+					cPlayer2.ClearVehicle(); 
+				}; 
+			};
+			
+			jModState.SetValue("Act4_Mission", 1000); // Reset value to 1000 to notify the Python script that the effect has been executed
+		};
+	};
+	
+	Actions
+	{
+		if ( jModState.GetValue("Act4_Mission") <= 1000 ) // Only set the value to 999 if there is not already a redemption waiting to be redeemed
+		{
+			jModState.SetValue("Act4_Mission", 999);
+		};
+	};
+};
+
+
+Base();
