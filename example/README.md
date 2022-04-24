@@ -1,1 +1,1 @@
-WIP
+WIP - this folder will contain an example of the mod with various features implemented.
