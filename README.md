@@ -1,5 +1,5 @@
 ## LCU / Twitch Integration Mod
-This mod allows viewers of a livestream to spend channel points in order to redeem various effects on the streamer's game.
+This mod integrates with LEGO City Undercover and Twitch to allow viewers of a livestream of the game to spend their channel points in order to redeem various effects on the streamer's game.
 
 ## Explanation and Examples
 Channel points are gained by watching a certain streamer for long periods of time, and consistently, as well as through methods such as following or subscribing. Streamers can create custom "rewards" that people can redeem using their points. This mod takes advantage of this, and allows you to make rewards that have actual effects inside the streamer's game.
