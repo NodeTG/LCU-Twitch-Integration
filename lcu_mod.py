@@ -20,30 +20,11 @@ async def read_offsets(proc, base_address, offsets):
     
     return current_pointer + offsets[-1]
 
-async def patch_functions():
-    gravity_func1 = proc["modules"]["LEGOLCUR_DX11.exe"]["baseaddr"] + 0x49E45E
-    gravity_func2 = proc["modules"]["LEGOLCUR_DX11.exe"]["baseaddr"] + 0x68F201
-
-    pymeow.nop_code(proc, gravity_func1, 8)
-    pymeow.nop_code(proc, gravity_func2, 9)
-
 async def reload_addrs():
-    global data_addr, scale1_addr, scale2_addr, p1grav_addr, p2grav_addr
-
+    global data_addr
     try:
-        await patch_functions()
-
         data_base_addr   = proc["modules"]["LEGOLCUR_DX11.exe"]["baseaddr"] + 0x017ECA08
-        scale1_base_addr = proc["modules"]["LEGOLCUR_DX11.exe"]["baseaddr"] + 0x01C3F268
-        scale2_base_addr = proc["modules"]["LEGOLCUR_DX11.exe"]["baseaddr"] + 0x01C74B20
-        p1grav_base_addr = proc["modules"]["LEGOLCUR_DX11.exe"]["baseaddr"] + 0x01C3F268
-        p2grav_base_addr = proc["modules"]["LEGOLCUR_DX11.exe"]["baseaddr"] + 0x01C74928
-        
         data_addr = await read_offsets(proc, data_base_addr, [0x48, 0x60, 0x68, 0x38, 0x88])
-        scale1_addr = await read_offsets(proc, scale1_base_addr, [0x70])
-        scale2_addr = await read_offsets(proc, scale2_base_addr, [0x198, 0x70])
-        p1grav_addr = await read_offsets(proc, p1grav_base_addr, [0x1F4])
-        p2grav_addr = await read_offsets(proc, p2grav_base_addr, [0x90, 0x1F4])
     except:
         print("[WARNING] Failed to load addresses - if you're on the title screen or loading into a level, you can ignore this message.")
         return False
